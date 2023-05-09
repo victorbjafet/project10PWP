@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <head><meta http-equiv="Content-Type" content="text/plain; charset=utf-8"/></head>
+    <link rel="stylesheet" href="/static/dashboard.css" /> <!-- link to the css file -->
+    <title>Dashboard</title>
+  </head>
+  <div class="body">
+
+    
+    <!-- this div is for the video feed and arrow compass -->
+    <div class="topL">
+      <img id="arrowCompass" src="/static/images/arrowCompass.png" style="transform-origin: 45px 45px; position: absolute; max-width: 50px; max-height: 50px; padding-left: 20px; padding-top: 20px;"> <!-- transition gives the smooth effect, rotation origin is center of image, so margins (20px) + half the size of the resized image (resized 50px, half 25px), position absolute to not push away the div, padding and max size to pad and shrink the image for positioning purposes --> 
+      <div style="display: flex; align-items: center; justify-content: center; top: 0; left: 0; height: 100%; width: 100%;"> <!-- flexbox to center the video feed, but the arrow is outside so that it can remain where it is with absolute positioning, also takes up entirety of parent div to not mess with flex positioning-->
+        <img src="{{ url_for('video_feed') }}" style="max-width: 95%; max-height: 95%;"> <!-- video feed, max stuff set to ensure no overflow and also give some nice margins (using flex) -->
+      </div>
+    </div>
+
+
+    <!-- this div is for the username and the wasd input (user must be focused on the image to do wasd input) -->
+    <div class="topR">
+      <!-- display greeting message with current username -->
+      <h1>Welcome, {{username}}</h1>
+      <!-- wasd input image, tabindex allows for it to be focused on -->
+      <img id="wasdInputImage" src="/static/images/wasdElement.png" tabindex="0">
+      <script>
+        let keyPressedDown = false; // initializes boolean to check if a key is pressed down
+        function checkFocus() { // run the function on every animation frame (rercursively)
+			    requestAnimationFrame(checkFocus);
+			    if (document.activeElement === document.getElementById("wasdInputImage")) { // if the element is focused
+            document.getElementById("wasdInputImage").addEventListener("keydown", function(event) { // run event listeners for keydown and keyup
+              if (!keyPressedDown) {
+                keyPressedDown = true; // set boolean to true to prevent multiple keydown events
+                console.log(event.key + " pressed");
+                if (event.key === "w") {
+                  fetch("forwardIndef");
+                } else if (event.key === "s") {
+                  fetch("backwardIndef");
+                } else if (event.key === "a") {
+                  fetch("leftIndef");
+                } else if (event.key === "d") {
+                  fetch("rightIndef");
+                }
+              }
+            });
+            document.getElementById("wasdInputImage").addEventListener("keyup", function(event) {
+              if (keyPressedDown) {
+                keyPressedDown = false; // set boolean to false to allow for keydown events again
+                console.log(event.key + " released");
+                fetch("stop")
+              }
+            });
+          }
+		    }
+        checkFocus(); // start the function on page load to being checking for focus every animation frame
+      </script>
+    </div>
+
+
+    <!-- this entire div is just the buttons and its pretty intuitive -->
+    <div class="downL">
+      <button onclick="forward()">Forward</button>
+      <script>
+        function forward() {
+          document.getElementById("arrowCompass").style.transform = 'rotate(0deg)';
+          fetch("forward")
+        }
+      </script>
+
+      <button onclick="backward()">Backward</button>
+      <script>
+        function backward() {
+          document.getElementById("arrowCompass").style.transform = 'rotate(180deg)';
+          fetch("backward")
+        }
+      </script>
+
+      <button onclick="left()">Left</button>
+      <script>
+        function left() {
+          document.getElementById("arrowCompass").style.transform = 'rotate(-90deg)';
+          fetch("left")
+        }
+      </script>
+
+      <button onclick="right()">Right</button>
+      <script>
+        function right() {
+          document.getElementById("arrowCompass").style.transform = 'rotate(90deg)';
+          fetch("right")
+        }
+      </script>
+
+      <button onclick="stop()">Stop</button>
+      <script>
+        function stop() {
+          fetch("stop");
+        }
+      </script>
+
+      <button onclick="forwardIndef()">Forward Indefinitely</button>
+      <script>
+        function forwardIndef() {
+          fetch("forwardIndef");
+        }
+      </script>
+
+      <button onclick="backwardIndef()">Backward Indefinitely</button>
+      <script>
+        function backwardIndef() {
+          fetch("backwardIndef");
+        }
+      </script>
+
+      <button onclick="leftIndef()">Left Indefinitely</button>
+      <script>
+        function leftIndef() {
+          fetch("leftIndef");
+        }
+      </script>
+
+      <button onclick="rightIndef()">Right Indefinitely</button>
+      <script>
+        function rightIndef() {
+          fetch("rightIndef");
+        }
+      </script>
+    </div>
+
+
+    <div class="downR">
+      <div id="log"></div>
+      <script>
+          var logDiv = document.getElementById('log'); // refers to the div element that was created above the script tag
+          var logEventSource = new EventSource('/log'); // refers to the route that we created in the server for server sent events (sses)
+          logEventSource.onmessage = function(event) { // listens to the message event using the onmessage attribute of the EventSource object
+              var data = event.data.trim(); // trims the data to remove any whitespace
+              if (data !== '') { // checks if the data is not empty
+                logDiv.innerHTML += data + '<br>'; // adds the new data to the div element with a line break (br because the text is being displayed in an html element)
+                var lineList = logDiv.innerHTML.split('<br>'); // splits the data in the html element into a list of lines
+                logDiv.innerHTML = lineList.slice(-24).join('<br>'); // slices the list to only have the last 23 lines and then joins them back together with line breaks
+              }
+          };
+      </script>
+    </div>
+    <a href="{{url_for('logout')}}"><h3>Press here to logout</h3></a>
+  </div>
+</html>

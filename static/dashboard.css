@@ -1,0 +1,58 @@
+/* i know i could probably use the same class for all the divs, but shhhhh */
+.body {
+  background: white;
+  display: grid;
+  height: 60rem;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1rem;
+  overflow: auto;
+  }
+   
+.topL {
+  background-color: lightgray;
+  overflow: auto;
+  }
+   
+.topR {
+  background-color: lightgray;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  }
+
+.downL{
+  background-color:lightgray;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  }
+
+.downR{
+  background-color: lightgray;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  padding-left: 15px;
+  flex-direction: column;
+}
+
+button{
+  background-color: rgb(98, 98, 98);
+  border: black;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 95%;
+  height: 10%;
+  cursor: pointer;
+  margin: 2px;
+}

@@ -1,0 +1,182 @@
+Start of Server Session - 03/01/2023@16:48:50
+Anonymous User (127.0.0.1) - 03/01/2023@16:48:50 | Home Page
+Anonymous User (127.0.0.1) - 03/01/2023@16:49:13 | Login Page
+Anonymous User (127.0.0.1) - 03/01/2023@16:49:20 | Login Page
+victor (127.0.0.1) - 03/01/2023@16:49:20 | Login and Redirect
+victor (127.0.0.1) - 03/01/2023@16:49:20 | Dashboard Page
+victor (127.0.0.1) - 03/01/2023@16:49:20 | Set "video_feed" Endpoint as Video Stream Source
+victor (127.0.0.1) - 03/01/2023@16:49:21 | Set "log" Endpoint as Log SSE Source
+victor (127.0.0.1) - 03/01/2023@16:49:51 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:49:52 | Stop
+victor (127.0.0.1) - 03/01/2023@16:49:52 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:49:52 | Stop
+victor (127.0.0.1) - 03/01/2023@16:49:52 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:49:52 | Stop
+victor (127.0.0.1) - 03/01/2023@16:49:53 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:49:54 | Stop
+victor (127.0.0.1) - 03/01/2023@16:49:54 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:49:54 | Stop
+victor (127.0.0.1) - 03/01/2023@16:49:56 | Stop
+victor (127.0.0.1) - 03/01/2023@16:49:56 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:49:56 | Stop
+victor (127.0.0.1) - 03/01/2023@16:49:56 | Backward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:49:57 | Stop
+victor (127.0.0.1) - 03/01/2023@16:49:57 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:49:57 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:02 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:02 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:03 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:03 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:03 | Backward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:03 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:03 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:04 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:04 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:04 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:04 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:04 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:04 | Backward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:04 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:04 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:05 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:06 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Backward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:07 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:08 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:09 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:10 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Left Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Right Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:11 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:12 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:12 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:12 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:13 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:13 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:13 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:14 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:14 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:14 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:15 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:15 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:15 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:15 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:16 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:16 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:16 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:17 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:17 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:17 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:18 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:18 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:18 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:19 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:19 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:19 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:20 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:20 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:20 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:20 | Stop
+victor (127.0.0.1) - 03/01/2023@16:50:45 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:50:47 | Stop
+victor (127.0.0.1) - 03/01/2023@16:51:00 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:51:11 | Forward Indefinitely
+victor (127.0.0.1) - 03/01/2023@16:51:34 | Logout
+Anonymous User (127.0.0.1) - 03/01/2023@16:51:34 | Login Page
+Start of Server Session - 03/08/2023@08:28:07
+Start of Server Session - 04/18/2023@08:16:09
+Anonymous User (127.0.0.1) - 04/18/2023@08:16:15 | Home Page
+Anonymous User (127.0.0.1) - 04/18/2023@08:16:19 | Login Page
+Anonymous User (127.0.0.1) - 04/18/2023@08:16:27 | Login Page
+victor (127.0.0.1) - 04/18/2023@08:16:28 | Login and Redirect
+victor (127.0.0.1) - 04/18/2023@08:16:28 | Dashboard Page
+victor (127.0.0.1) - 04/18/2023@08:16:28 | Set "video_feed" Endpoint as Video Stream Source
+victor (127.0.0.1) - 04/18/2023@08:16:28 | Set "log" Endpoint as Log SSE Source
+victor (127.0.0.1) - 04/18/2023@08:16:37 | Forward Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:37 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:37 | Forward Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:38 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:38 | Forward Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:38 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:38 | Forward Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:39 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:39 | Forward Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:39 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:39 | Forward Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:39 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:39 | Left Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:40 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:40 | Backward Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:40 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:40 | Right Indefinitely
+victor (127.0.0.1) - 04/18/2023@08:16:40 | Stop
+victor (127.0.0.1) - 04/18/2023@08:16:46 | Logout
+Anonymous User (127.0.0.1) - 04/18/2023@08:16:46 | Login Page
+Start of Server Session - 04/20/2023@07:49:15
+Start of Server Session - 05/09/2023@08:12:46
+Anonymous User (127.0.0.1) - 05/09/2023@08:13:06 | Home Page
+Start of Server Session - 05/09/2023@08:14:07
+Start of Server Session - 05/09/2023@08:14:16
+Anonymous User (127.0.0.1) - 05/09/2023@08:14:20 | Home Page
+Anonymous User (127.0.0.1) - 05/09/2023@08:14:21 | Home Page
