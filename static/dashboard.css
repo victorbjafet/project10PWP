@@ -2,26 +2,16 @@
 .body {
   background: white;
   display: grid;
-  height: 60rem;
+  height: 73rem;
   width: 100%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
   grid-gap: 1rem;
   overflow: auto;
   }
    
-.topL {
+.top {
   background-color: lightgray;
   overflow: auto;
-  }
-   
-.topR {
-  background-color: lightgray;
-  overflow: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   }
 
 .downL{

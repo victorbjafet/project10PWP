@@ -19,16 +19,16 @@ from wtforms import StringField, PasswordField, SubmitField #allows for the crea
 from wtforms.validators import InputRequired, Length, ValidationError #allows for the validation of user input in user registration/login forms
 from flask_bcrypt import Bcrypt #allows for the hashing of passwords
 
-#camera imports 
-from camera import CameraStream #imports "camerastream" class from 'camera.py' file located in the same dir as this app.py file
-import cv2 #opencv import
+#cv imports
+import cv2 as cv #opencv import
+import numpy as np #numpy import
+import pandas as pd #pandas import
 
 
 
 
 #OBJECT INSTANCES
 app = Flask(__name__) #creates flask app instance
-cap = CameraStream().start() #initialize camerastream object instance from camera.py
 
 #auth instances
 bcrypt = Bcrypt(app) #creates bcrypt instance for hashing passwords
@@ -172,33 +172,49 @@ def logout():
 @app.route("/skipBeginning", methods = ['GET','POST'])
 @login_required
 def skipBeginning():
-
-    logToFile(str(current_user.username) + " (" + str(request.environ['REMOTE_ADDR']) + ") - " + time.strftime("%m/%d/%Y") + "@" + time.strftime("%H:%M:%S", time.localtime()) + " | Forward\n")
-    return "<p>forward</p>"
+    logToFile(str(current_user.username) + " (" + str(request.environ['REMOTE_ADDR']) + ") - " + time.strftime("%m/%d/%Y") + "@" + time.strftime("%H:%M:%S", time.localtime()) + " | Skip to Beginning of Video\n")
+    return "<p>beginning</p>"
 
 @app.route("/skipMiddle", methods = ['GET','POST'])
 @login_required
 def skipMiddle():
-
-    logToFile(str(current_user.username) + " (" + str(request.environ['REMOTE_ADDR']) + ") - " + time.strftime("%m/%d/%Y") + "@" + time.strftime("%H:%M:%S", time.localtime()) + " | Forward\n")
-    return "<p>forward</p>"
+    logToFile(str(current_user.username) + " (" + str(request.environ['REMOTE_ADDR']) + ") - " + time.strftime("%m/%d/%Y") + "@" + time.strftime("%H:%M:%S", time.localtime()) + " | Skip to Middle of Video\n")
+    return "<p>middle</p>"
 
 
 
 #below are video related endpoints and functions
-def gen_frame(): #generator function, meaning it runs over and over again and the yield statement at the end instead of being a return it returns a ton over and over looped
-    while cap:
-        frame = cap.read() #calls class read method
-        convert = cv2.imencode('.jpg', frame)[1].tobytes() #sets 'encode' var to a .jpg encoded frame in some fancy byte thing idk its basically encoding the image and yea
+def process_video():
+    video_path = 'trimmed driving video.mp4'
+    video = cv.VideoCapture(video_path)
+
+    
+
+    while True:
+        success, frame = video.read()
+
+        if not success:
+            # End of video, reset to the beginning
+            video.set(cv.CAP_PROP_POS_FRAMES, 0)
+            continue
+
+        processed_frame1 = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+        processed_frame1 = cv.Canny(frame, 50, 150)
+
+        ret, buffer = cv.imencode('.jpg', frame)
+        frame_data = buffer.tobytes()
+        time.sleep(0.028)
+
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + convert + b'\r\n') # concate frame one by one and show result, idk whats going on here but it seems to just be like sending a frame with a ton of random stuff that i might need to understand later idk
+               b'Content-Type: image/jpeg\r\n\r\n' + frame_data + b'\r\n')
+
+    video.release()
 
 @app.route('/video_feed') #endpoint where raw video feed is streamed
 @login_required
 def video_feed():
-    logToFile(str(current_user.username) + " (" + str(request.environ['REMOTE_ADDR']) + ") - " + time.strftime("%m/%d/%Y") + "@" + time.strftime("%H:%M:%S", time.localtime()) + " | Set \"video_feed\" Endpoint as Video Stream Source\n")
-    return Response(gen_frame(),
-                    mimetype='multipart/x-mixed-replace; boundary=frame') #returns the running of the gen_frame function alongside some html stuff i guess? idk
+    # Return the streaming response
+    return Response(process_video(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 
