@@ -198,8 +198,8 @@ def process_video():
             video.set(cv.CAP_PROP_POS_FRAMES, 0)
             continue
 
-        processed_frame1 = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-        processed_frame1 = cv.Canny(frame, 50, 150)
+        gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+        edges = cv.Canny(frame, 50, 150)
 
         ret, buffer = cv.imencode('.jpg', frame)
         frame_data = buffer.tobytes()
