@@ -22,7 +22,6 @@ from flask_bcrypt import Bcrypt #allows for the hashing of passwords
 #cv imports
 import cv2 as cv #opencv import
 import numpy as np #numpy import
-import pandas as pd #pandas import
 
 
 
@@ -168,43 +167,152 @@ def logout():
     return redirect(url_for('login'))
 
 
-#endpoints to control what point in the video you want to go to
-@app.route("/skipBeginning", methods = ['GET','POST'])
-@login_required
-def skipBeginning():
-    logToFile(str(current_user.username) + " (" + str(request.environ['REMOTE_ADDR']) + ") - " + time.strftime("%m/%d/%Y") + "@" + time.strftime("%H:%M:%S", time.localtime()) + " | Skip to Beginning of Video\n")
-    return "<p>beginning</p>"
+# template matching stuff --------------------------------------------------------
+template_paths = ['cv_templates/car1.png', 'cv_templates/car1.1.png', 'cv_templates/car1.2.png', 'cv_templates/car2.png','cv_templates/leftArrow.png','cv_templates/rightArrow.png']
+templates = []
+template_resolutions = []
+template_keys = []
+for path in template_paths:
+    template = cv.imread(path, cv.IMREAD_GRAYSCALE)
+    templates.append(template)
+    template_resolutions.append(template.shape)
+    template_keys.append(path.split('/')[-1])
 
-@app.route("/skipMiddle", methods = ['GET','POST'])
-@login_required
-def skipMiddle():
-    logToFile(str(current_user.username) + " (" + str(request.environ['REMOTE_ADDR']) + ") - " + time.strftime("%m/%d/%Y") + "@" + time.strftime("%H:%M:%S", time.localtime()) + " | Skip to Middle of Video\n")
-    return "<p>middle</p>"
+video_path = 'finalVideo.mov'
+video = cv.VideoCapture(video_path)
+
+counter = 0
+lastLeftFrame = -180
+lastRightFrame = -180
+# template matching stuff --------------------------------------------------------
 
 
 
-#below are video related endpoints and functions
+# masked line detection stuff ----------------------------------------------------
+region_top_left = (0, 250)  # Example values for top-left coordinate
+region_bottom_right = (640, 360)  # Example values for bottom-right coordinate
+# masked line detection stuff ----------------------------------------------------
+
+
 def process_video():
-    video_path = 'trimmed driving video.mp4'
-    video = cv.VideoCapture(video_path)
-
-    
-
     while True:
-        success, frame = video.read()
+        global counter
+        global lastLeftFrame
+        global lastRightFrame
 
-        if not success:
-            # End of video, reset to the beginning
+        success, frame = video.read()
+        if not success: #if video ended then go back to beginning to loop the video
+            counter = 0
+            lastLeftFrame = -180
+            lastRightFrame = -180
             video.set(cv.CAP_PROP_POS_FRAMES, 0)
             continue
 
-        gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-        edges = cv.Canny(frame, 50, 150)
+        frame = cv.resize(frame, (640, 360))
+        counter += 1
+        
+
+        ##opencv stuff goes here -----------------------------------------------------
+        region_of_interest = frame[region_top_left[1]:region_bottom_right[1], region_top_left[0]:region_bottom_right[0]]
+        
+        for template, resolution, key in zip(templates, template_resolutions, template_keys):
+            gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+            heatmap = cv.matchTemplate(gray, template, cv.TM_CCOEFF_NORMED) # does the actual template matching, returns a heatmap of where the template matches
+            detectedLocations = np.where(heatmap >= 0.75) # ensures the matches are 75% accurate or more, and gets positions on the heatmap where the threshold is met
+            if detectedLocations:
+                for location in zip(*detectedLocations[-1::-1]): #for each detected matching location (iterating backwards)
+                    cv.rectangle(frame, location, (location[0] + resolution[1], location[1] + resolution[0]), (255, 0, 0), 2) #draws a rectangle around the matched area the size of the template that is being looked for, basically drawing a rectangle around the match
+                    if key[:3] == 'car':
+                        cv.putText(frame, 'car', location, cv.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+                    elif key[:4] == 'left':
+                        cv.putText(frame, 'left', location, cv.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+                        lastLeftFrame = counter
+                    elif key[:5] == 'right':
+                        cv.putText(frame, 'right', location, cv.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+                        lastRightFrame = counter
+                    break
+        
+        if counter - lastLeftFrame <= 180:
+            frame = cv.arrowedLine(frame, (90, 45), (10, 45), (255, 0, 0), 4)
+        elif counter - lastRightFrame <= 180:
+            frame = cv.arrowedLine(frame, (10, 45), (90, 45), (255, 0, 0), 4)
+        else:
+            frame = cv.arrowedLine(frame, (45, 90) , (45, 10), (255, 0, 0), 4)
+        
+        gray_roi = cv.cvtColor(region_of_interest, cv.COLOR_BGR2GRAY)
+        roi_edges = cv.Canny(gray_roi, 50, 150)
+        lines = cv.HoughLinesP(roi_edges, 1, np.pi / 180, 50, minLineLength=30, maxLineGap=30)
+
+        left_lines = []
+        right_lines = []
+        
+        try:
+            for line in lines:
+                x1, y1, x2, y2 = line[0]
+                if x2 - x1 != 0:
+                    slope = (y2 - y1) / (x2 - x1)
+                if slope > 0.4 or slope < -0.4:
+                    # below adds offsets to lines so that it goes in the right position in the original image
+                    x1 += region_top_left[0]
+                    y1 += region_top_left[1]
+                    x2 += region_top_left[0]
+                    y2 += region_top_left[1]
+                    
+                    if slope > 0:
+                        left_lines.append(line)
+                    elif slope < 0:
+                        right_lines.append(line)
+                
+                    cv.line(frame, (x1, y1), (x2, y2), (0, 255, 0), thickness=2)
+        except:
+            print('no lines at all')
+        
+        # Calculate the average slope and intercept for left lane lines
+        if left_lines:
+            left_slope = np.mean([((y2 - y1) / (x2 - x1)) for line in left_lines for x1, y1, x2, y2 in line if (x2 - x1) != 0])
+            left_intercept = np.mean([y1 - left_slope * x1 for line in left_lines for x1, y1, x2, y2 in line])
+        else:
+            # Handle case when no left lane lines are detected
+            left_slope = 0
+            left_intercept = 0
+
+        # Calculate the average slope and intercept for right lane lines
+        if right_lines:
+            right_slope = np.mean([((y2 - y1) / (x2 - x1)) for line in right_lines for x1, y1, x2, y2 in line if (x2 - x1) != 0])
+            right_intercept = np.mean([y1 - right_slope * x1 for line in right_lines for x1, y1, x2, y2 in line])
+        else:
+            # Handle case when no right lane lines are detected
+            right_slope = 0
+            right_intercept = 0
+        
+        # Define the y-coordinate range for extrapolation
+        y1 = region_of_interest.shape[0]
+        y2 = int(y1 * 0.3)
+        
+        # Calculate the x-coordinates for the left and right lane lines
+        if left_slope and left_intercept and y1 and y2:
+            left_x1 = int((y1 - left_intercept) / left_slope)
+            left_x2 = int((y2 - left_intercept) / left_slope)
+        if right_slope and right_intercept and y1 and y2:
+            right_x1 = int((y1 - right_intercept) / right_slope)
+            right_x2 = int((y2 - right_intercept) / right_slope)
+        
+        # Draw the lane lines on the original image
+        line_image = np.zeros_like(region_of_interest)
+        if left_slope and left_intercept:
+            cv.line(frame, (left_x1, y1 + region_top_left[1]), (left_x2, y2 + region_top_left[1]), (0, 0, 255), 10)
+        if right_slope and right_intercept:
+            cv.line(frame, (right_x1, y1 + region_top_left[1]), (right_x2, y2 + region_top_left[1]), (0, 0, 255), 10)
+
+        if left_slope and left_intercept and right_slope and right_intercept:
+            cv.line(frame, (int((left_x1 + right_x1) / 2), y1 + region_top_left[1]), (int((left_x2 + right_x2) / 2), y2 + region_top_left[1]), (255, 0, 255), 10)
+        ##opencv stuff goes here -----------------------------------------------------
+
+
 
         ret, buffer = cv.imencode('.jpg', frame)
         frame_data = buffer.tobytes()
         time.sleep(0.028)
-
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame_data + b'\r\n')
 
